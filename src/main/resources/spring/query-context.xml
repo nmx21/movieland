@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="getMovieByIdSQL" class="java.lang.String">
+        <constructor-arg
+                value="SELECT id, movie_name_ru, movie_name_original, year, raiting, price FROM movie where id = ?;"/>
+    </bean>
+
+    <bean id="addMovieSQL" class="java.lang.String">
+        <constructor-arg
+                value="INSERT INTO city (movie_name_ru, movie_name_original, year, raiting, price) VALUES (:movie_name_ru, :movie_name_original, :year, :raiting, :price);"/>
+    </bean>
+</beans>
