@@ -6,6 +6,8 @@ import com.movieland.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieServiceImpl implements MovieService {
     @Autowired
@@ -19,5 +21,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void add(Movie movie) {
         movieDao.add(movie);
+    }
+
+    @Override
+    public List<Movie> getRandomMovie() {
+        return movieDao.getRandomMovie();
     }
 }

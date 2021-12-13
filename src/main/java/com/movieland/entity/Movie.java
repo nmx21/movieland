@@ -1,12 +1,21 @@
 package com.movieland.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
     private Long id;
+    @JsonProperty("nameRussian")
     private String movieNameRu;
+    @JsonProperty("nameNative")
     private String movieNameOriginal;
-    private Byte yearId;
+    @JsonProperty("yearOfRelease")
+    private Integer year;
     private Double rating;
     private Double price;
+    @JsonProperty("picturePath")
+    private String url;
 
     public Long getId() {
         return id;
@@ -32,12 +41,12 @@ public class Movie {
         this.movieNameOriginal = movieNameOriginal;
     }
 
-    public Byte getYearId() {
-        return yearId;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setYearId(Byte yearId) {
-        this.yearId = yearId;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public Double getRating() {
@@ -54,5 +63,13 @@ public class Movie {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
