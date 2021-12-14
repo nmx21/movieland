@@ -1,8 +1,11 @@
 package com.movieland.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Genre {
     private Long id;
-    private String genreName;
+    private String name;
 
     public Long getId() {
         return id;
@@ -12,11 +15,11 @@ public class Genre {
         this.id = id;
     }
 
-    public String getGenreName() {
-        return genreName;
+    public String getName() {
+        return name;
     }
 
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

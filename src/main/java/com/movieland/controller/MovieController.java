@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,4 +43,20 @@ public class MovieController {
         log.info("Sending request to get random movie ");
         return movieService.getRandomMovie();
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Movie>> getMovieByGenreId(@PathVariable("genreId") int genreId) {
+        List<Movie> movie = new ArrayList<>();
+        log.info("Sending request to get movie with genre id = {}", genreId);
+        try {
+            movie = movieService.getMovieByGenreId(genreId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.badRequest().body(movie);
+        }
+        return ResponseEntity.ok(movie);
+    }
+
+
 }

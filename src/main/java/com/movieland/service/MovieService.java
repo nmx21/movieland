@@ -1,6 +1,7 @@
 package com.movieland.service;
 
 import com.movieland.entity.Movie;
+
 import java.util.List;
 
 public interface MovieService {
@@ -9,4 +10,6 @@ public interface MovieService {
     void add(Movie movie);
 
     List<Movie> getRandomMovie();
+
+    List<Movie> getMovieByGenreId(long id);
 }

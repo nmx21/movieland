@@ -32,6 +32,9 @@ public class MovieDaoImpl implements MovieDao {
     @Autowired
     private String getRandomMovieSQL;
 
+    @Autowired
+    private String getMovieByGenreSQL;
+
     @Override
     public Movie getById(long id) {
         log.info("Start query to get movie with id {} from DB", id);
@@ -62,6 +65,16 @@ public class MovieDaoImpl implements MovieDao {
         List<Movie> movies = jdbcTemplate.query(getRandomMovieSQL, new MovieRowMapper());
         log.info("Finish query to get random 3 movies from DB. It took {} ms", System.currentTimeMillis() - startTime);
         return movies;
+    }
+
+    @Override
+    public List<Movie> getMovieByGenreId(long id) {
+        log.info("Start query to get movie by genre id from DB");
+        long startTime = System.currentTimeMillis();
+        List<Movie> movies = jdbcTemplate.query(getMovieByGenreSQL, new Object[]{id}, new MovieRowMapper());
+        log.info("Finish query to get movie by genre id  {} from DB. It took {} ms", id, System.currentTimeMillis() - startTime);
+        return movies;
+
     }
 
 
