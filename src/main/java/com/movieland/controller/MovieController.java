@@ -46,16 +46,11 @@ public class MovieController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<List<Movie>> getMovieByGenreId(@PathVariable("genreId") int genreId) {
+    public List<Movie> getMovieByGenreId(@PathVariable("genreId") int genreId) {
         List<Movie> movie = new ArrayList<>();
         log.info("Sending request to get movie with genre id = {}", genreId);
-        try {
-            movie = movieService.getMovieByGenreId(genreId);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return ResponseEntity.badRequest().body(movie);
-        }
-        return ResponseEntity.ok(movie);
+        movie = movieService.getMovieByGenreId(genreId);
+        return movie;
     }
 
 

@@ -9,18 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MovieServiceImpl implements MovieService {
+public class MovieServiceImplement implements MovieService {
     @Autowired
     MovieDao movieDao;
 
     @Override
     public Movie getById(long id) {
         return movieDao.getById(id);
-    }
-
-    @Override
-    public void add(Movie movie) {
-        movieDao.add(movie);
     }
 
     @Override

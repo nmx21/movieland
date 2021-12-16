@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GenreServiceImpl implements GenreService {
+public class GenreServiceImplement implements GenreService {
     @Autowired
     GenreDao genreDao;
 

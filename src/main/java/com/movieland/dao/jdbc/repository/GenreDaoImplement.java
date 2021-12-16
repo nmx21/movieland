@@ -1,4 +1,4 @@
-package com.movieland.dao.jdbc;
+package com.movieland.dao.jdbc.repository;
 
 import com.movieland.dao.GenreDao;
 import com.movieland.dao.jdbc.mapper.GenreRowMapper;
@@ -7,30 +7,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
-public class GenreDaoImpl implements GenreDao {
+@Repository
+public class GenreDaoImplement implements GenreDao {
     private final Logger log = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private NamedParameterJdbcTemplate namedJdbcTemplate;
-
-    @Autowired
-    private String getAllGenresSQL;
+    private final static String GET_ALL_GENRES_SQL = "SELECT id, name FROM genre;";
 
     @Override
     public List<Genre> getAllGenres() {
         log.info("Start query to get all genres from DB");
         long startTime = System.currentTimeMillis();
-        List<Genre> genres = jdbcTemplate.query(getAllGenresSQL, new GenreRowMapper());
-        log.info("Finish query to get random 3 movies from DB. It took {} ms", System.currentTimeMillis() - startTime);
+        List<Genre> genres = jdbcTemplate.query(GET_ALL_GENRES_SQL, new GenreRowMapper());
+        log.info("Finish query to get all genres from DB. It took {} ms", System.currentTimeMillis() - startTime);
         return genres;
     }
 
