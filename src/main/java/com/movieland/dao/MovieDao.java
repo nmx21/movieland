@@ -10,4 +10,6 @@ public interface MovieDao {
     List<Movie> getRandomMovie();
 
     List<Movie> getMovieByGenreId(long id);
+
+    List<Movie> getMovieSort(String ratingTypeSort,String priceTypeSort);
 }

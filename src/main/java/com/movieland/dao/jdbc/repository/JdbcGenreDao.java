@@ -12,20 +12,23 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class GenreDaoImplement implements GenreDao {
+    public class JdbcGenreDao implements GenreDao {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     private final static String GET_ALL_GENRES_SQL = "SELECT id, name FROM genre;";
+    private final GenreRowMapper genreRowMapper = new GenreRowMapper();
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public JdbcGenreDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Genre> getAllGenres() {
         log.info("Start query to get all genres from DB");
         long startTime = System.currentTimeMillis();
-        List<Genre> genres = jdbcTemplate.query(GET_ALL_GENRES_SQL, new GenreRowMapper());
+        List<Genre> genres = jdbcTemplate.query(GET_ALL_GENRES_SQL, genreRowMapper);
         log.info("Finish query to get all genres from DB. It took {} ms", System.currentTimeMillis() - startTime);
         return genres;
     }
-
-
 }

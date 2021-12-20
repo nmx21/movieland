@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 @EnableScheduling
 @PropertySource("classpath:application.properties")
 
-
 public class JdbcConfiguration {
     @Autowired
     private Environment environment;

@@ -7,24 +7,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
-@RequestMapping("/api/v1/movie")
+@RestController
+@RequestMapping("/movie")
 public class MovieController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     MovieService movieService;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(path = "/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Movie> getMovieById(@PathVariable("movieId") int movieId) {
         Movie movie = null;
         log.info("Sending request to get movie with id = {}", movieId);
@@ -37,19 +32,25 @@ public class MovieController {
         return ResponseEntity.ok(movie);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(path = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> getRandomMovie() {
         log.info("Sending request to get random movie ");
         return movieService.getRandomMovie();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(path = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> getMovieByGenreId(@PathVariable("genreId") int genreId) {
         List<Movie> movie = new ArrayList<>();
         log.info("Sending request to get movie with genre id = {}", genreId);
         movie = movieService.getMovieByGenreId(genreId);
+        return movie;
+    }
+
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Movie> getMovieByRating(@RequestParam(name = "rating", required = false) String ratingTypeSort, @RequestParam(name = "price", required = false) String priceTypeSort) {
+        List<Movie> movie = new ArrayList<>();
+        log.info("Sending request to get movie sort by {} {}", ratingTypeSort, priceTypeSort);
+        movie = movieService.getMovieSort(ratingTypeSort, priceTypeSort);
         return movie;
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MovieServiceImplement implements MovieService {
+public class DefaultMovieService implements MovieService {
     @Autowired
     MovieDao movieDao;
 
@@ -26,5 +26,10 @@ public class MovieServiceImplement implements MovieService {
     @Override
     public List<Movie> getMovieByGenreId(long id) {
         return movieDao.getMovieByGenreId(id);
+    }
+
+    @Override
+    public List<Movie> getMovieSort(String ratingTypeSort, String priceTypeSort) {
+        return movieDao.getMovieSort(ratingTypeSort, priceTypeSort);
     }
 }
