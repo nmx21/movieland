@@ -1,6 +1,6 @@
 package com.movieland.controller;
 
-import com.movieland.entity.Movie;
+import com.movieland.persistance.entity.Movie;
 import com.movieland.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,11 +39,12 @@ public class MovieController {
     }
 
     @GetMapping(path = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Movie> getMovieByGenreId(@PathVariable("genreId") int genreId) {
-        List<Movie> movie = new ArrayList<>();
+    public List getMovieByGenreId(@PathVariable("genreId") int genreId) {
+        //List movie = new ArrayList();
         log.info("Sending request to get movie with genre id = {}", genreId);
-        movie = movieService.getMovieByGenreId(genreId);
-        return movie;
+        //movie = movieService.getMovieByGenreId(genreId);
+        //        return movie;
+        return movieService.getMovieByGenreId(genreId);
     }
 
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)

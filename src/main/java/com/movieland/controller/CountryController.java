@@ -1,7 +1,7 @@
 package com.movieland.controller;
 
-import com.movieland.persistance.entity.Genre;
-import com.movieland.service.GenreService;
+import com.movieland.persistance.entity.Country;
+import com.movieland.service.CountryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/genre")
-public class GenreController {
+@RequestMapping("/country")
+public class CountryController {
     private final Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
-    GenreService genreService;
+    CountryService countryService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Genre> getAllGenre() {
-        log.info("Sending request to get all genres");
-        return genreService.getAllGenre();
+    public List<Country> getAllCountry() {
+        log.info("Sending request to get all country");
+        return countryService.getAllCountry();
     }
 }

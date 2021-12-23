@@ -1,6 +1,6 @@
 package com.movieland.service;
 
-import com.movieland.entity.Genre;
+import com.movieland.persistance.entity.Genre;
 
 import java.util.List;
 

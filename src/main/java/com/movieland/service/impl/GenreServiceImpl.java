@@ -1,7 +1,7 @@
 package com.movieland.service.impl;
 
-import com.movieland.dao.GenreDao;
-import com.movieland.entity.Genre;
+import com.movieland.persistance.entity.Genre;
+import com.movieland.persistance.repository.GenreRepository;
 import com.movieland.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DefaultGenreService implements GenreService {
+public class GenreServiceImpl implements GenreService {
+
     @Autowired
-    GenreDao genreDao;
+    GenreRepository genreRepository;
 
     @Override
     public List<Genre> getAllGenre() {
-        return genreDao.getAllGenres();
+        return genreRepository.getAllGenre();
     }
 }
